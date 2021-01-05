@@ -71,7 +71,8 @@ namespace Project.Service
             var teamToSave = new Team()
             {
                 Name = team.Name,
-                LeaderId = team.TeamLeader
+                LeaderId = team.TeamLeader,
+                CreatedAt = DateTime.Now
             };
 
             await teamRepository.SaveTeam(teamToSave);

@@ -73,15 +73,15 @@ namespace Project.Service
             return await userRepository.UpdateUser(user);
         }
 
-        public void ArchiveUser(int userId)
+        public async Task<int> ArchiveUser(int userId)
         {
-            userRepository.ArchiveUser(userId);
+            return await userRepository.ArchiveUser(userId);
         }
 
         public async Task<TokenDTO> AuthenticateUser(UserCredentials userCredentials)
         {
             var user = await userRepository.GetUserByEmail(userCredentials.Email);
-            if (user == null)
+            if (user == null || user.ArchivedAt != null)
                 return null;
 
             if (VerifyPasswordHash(userCredentials.Password, user.PasswordHash, user.PasswordSalt))

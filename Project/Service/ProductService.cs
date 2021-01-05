@@ -101,6 +101,10 @@ namespace Project.Service
 
         public async Task<ProductDTO> SaveProduct(Product product)
         {
+            if (product.DevTeam == -1)
+            {
+                product.DevTeam = null;
+            }
             await productRepository.SaveProduct(product);
             return await GetProductById(product.Id);
         }

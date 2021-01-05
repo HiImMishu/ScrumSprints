@@ -130,7 +130,7 @@ namespace Project.Controllers
                 return NotFound();
             }
 
-            userService.ArchiveUser(id);
+            await userService.ArchiveUser(id);
 
             return Ok();
         }

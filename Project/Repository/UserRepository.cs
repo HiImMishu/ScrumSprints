@@ -69,11 +69,11 @@ namespace Project.Repository
             return _context.User.Any(e => e.id == id);
         }
 
-        public async void ArchiveUser(int id)
+        public async Task<int> ArchiveUser(int id)
         {
             var user = _context.User.Find(id);
             user.ArchivedAt = DateTime.Now;
-            await _context.SaveChangesAsync();     
+            return await _context.SaveChangesAsync();     
         }
 
         public async Task<User> GetUserByEmail(string email)
@@ -93,7 +93,7 @@ namespace Project.Repository
         User GetUserById(int userID);
         Task<int> SaveUser(User user);
         Task<bool> UpdateUser(SimpleUserDTO user);
-        void ArchiveUser(int userId);
+        Task<int> ArchiveUser(int userId);
         Task<User> GetUserByEmail(string email);
         Task<List<User>> GetUsersByTeamId(int teamId);
     }

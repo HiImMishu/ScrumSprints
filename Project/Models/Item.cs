@@ -33,7 +33,6 @@ namespace Project.Models
         public int? ModifiedBy { get; set; }
 
         [JsonIgnore]
-        [Required]
         public virtual Product Product { get; set; }
     }
 }

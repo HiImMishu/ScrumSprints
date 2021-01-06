@@ -70,6 +70,11 @@ namespace Project.Service
 
         public async Task<ItemDTO> UpdateItem(Item item)
         {
+            if (item.SprintId == -1)
+            {
+                item.SprintId = null;
+            }
+
             if (item.SprintId != null && backlogRepository.GetBacklogById((int)item.SprintId) == null)
             {
                 return null;

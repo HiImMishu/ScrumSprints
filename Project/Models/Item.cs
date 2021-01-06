@@ -20,7 +20,7 @@ namespace Project.Models
         public DateTime AddedAt { get; set; } = DateTime.Now;
 
         [StringLength(maximumLength: 1000, ErrorMessage = "Status edscription too long.")]
-        public string status { get; set; } = "ToDo";
+        public string status { get; set; } = "Added";
 
         [Required]
         [ForeignKey("Product")]

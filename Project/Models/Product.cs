@@ -24,5 +24,8 @@ namespace Project.Models
         [ForeignKey("Team")]
         [JsonIgnore]
         public int? DevTeam { get; set; }
+
+        [JsonIgnore]
+        public virtual Team Team { get; set; }
     }
 }

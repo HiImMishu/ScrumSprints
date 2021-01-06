@@ -34,5 +34,8 @@ namespace Project.Models
 
         [JsonIgnore]
         public virtual Product Product { get; set; }
+
+        [JsonIgnore]
+        public virtual SprintBacklog SprintBacklog { get; set; }
     }
 }

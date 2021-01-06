@@ -66,7 +66,7 @@ namespace Project.Controllers
                 return Forbid();
             }
 
-            if (!preUpdatedTeam.Members.Any(m => m.Id == team.TeamLeader))
+            if (!preUpdatedTeam.Members.Any(m => m.Id == team.TeamLeader) && preUpdatedTeam.TeamLeader.Id != team.TeamLeader)
             {
                 return BadRequest(new { message = "New Team Leader must be a team member." });
             }

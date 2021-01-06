@@ -26,7 +26,6 @@ namespace Project.Models
         public DateTime EndTime { get; set; }
 
         [JsonIgnore]
-        [Required]
         public virtual Product Product { get; set; }
     }
 }

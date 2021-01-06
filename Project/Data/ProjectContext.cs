@@ -36,10 +36,20 @@ namespace Project.Data
                 .WithMany()
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Item>()
+                .HasOne(p => p.SprintBacklog)
+                .WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
+
             modelBuilder.Entity<SprintBacklog>()
                 .HasOne(p => p.Product)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Team)
+                .WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
         public DbSet<Project.Models.User> User { get; set; }

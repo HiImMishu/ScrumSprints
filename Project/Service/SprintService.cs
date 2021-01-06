@@ -44,7 +44,11 @@ namespace Project.Service
 
         public async Task<BacklogDTO> UpdateSprint(SprintBacklog sprintBacklog)
         {
-            await backlogRepository.UpdateBacklog(sprintBacklog);
+            var sprintToUpdate = backlogRepository.GetBacklogById(sprintBacklog.Id);
+            sprintToUpdate.StartTime = sprintBacklog.StartTime;
+            sprintToUpdate.EndTime = sprintBacklog.EndTime;
+            sprintToUpdate.Description = sprintBacklog.Description;
+            await backlogRepository.UpdateBacklog(sprintToUpdate);
             return await GetBacklogById(sprintBacklog.Id);
         }
 

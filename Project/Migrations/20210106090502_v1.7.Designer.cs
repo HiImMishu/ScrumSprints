@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.Data;
 
 namespace Project.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20210106090502_v1.7")]
+    partial class v17
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,8 +66,6 @@ namespace Project.Migrations
                     b.Property<int>("OwnerId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DevTeam");
 
                     b.ToTable("Product");
                 });
@@ -173,14 +173,6 @@ namespace Project.Migrations
                     b.HasOne("Project.Models.SprintBacklog", "SprintBacklog")
                         .WithMany()
                         .HasForeignKey("SprintId")
-                        .OnDelete(DeleteBehavior.SetNull);
-                });
-
-            modelBuilder.Entity("Project.Models.Product", b =>
-                {
-                    b.HasOne("Project.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("DevTeam")
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 

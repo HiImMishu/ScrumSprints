@@ -83,7 +83,7 @@ namespace Project.Repository
 
         public async Task<int> RemoveTeamMember(int memberId, int teamId)
         {
-            var member = _context.Team.Include(t => t.UserTeams).First().UserTeams.Where(ut => ut.UserId == memberId).First();
+            var member = _context.Team.Include(t => t.UserTeams).ToList().Find(t => t.Id == teamId).UserTeams.Where(ut => ut.UserId == memberId).First();
             _context.Team.Find(teamId).UserTeams.Remove(member);
 
             return await _context.SaveChangesAsync();

@@ -15,10 +15,12 @@ namespace Project.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly ProductService productService;
+        private readonly TeamService teamService;
 
-        public ProductsController(ProductService productService)
+        public ProductsController(ProductService productService, TeamService teamService)
         {
             this.productService = productService;
+            this.teamService = teamService;
         }
 
         [HttpGet("{id}")]
@@ -35,6 +37,16 @@ namespace Project.Controllers
             if (product == null)
             {
                 return NotFound();
+            }
+
+            TeamDTO team = null;
+            if (product.DevTeam != null)
+            {
+                team = await teamService.GetTeamById(product.DevTeam.Id);
+                if (team.Members.Any(m => m.Id == userId) || team.TeamLeader.Id == userId)
+                {
+                    return Ok(product);
+                }
             }
 
             if (product.Owner.Id != userId)
